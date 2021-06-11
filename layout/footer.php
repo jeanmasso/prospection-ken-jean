@@ -5,7 +5,7 @@
   <!-- Barre de navigation de bas de page -->
   <nav class="navbar navbar-light bg-light bottom-auto position-relative">
     <div class="container-fluid">
-      <a class="navbar-brand" href="../index.php">My blog</a>
+      <a class="navbar-brand" href="../index.php"></a>
     </div>
   </nav>
 </footer><!-- !END FOOTER -->

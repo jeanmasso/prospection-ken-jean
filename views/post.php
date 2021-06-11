@@ -7,6 +7,26 @@ include "../classes/tableClass.php";
 //$posts = $posts->getAllData();
 
 ?>
+<?php
+$servername = "127.0.0.1";
+$username = "root";
+$password = "root";
+$dbname = 'prospection';
+
+try {
+  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+  // set the PDO error mode to exception
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  echo "Connected successfully";
+} catch(PDOException $e) {
+  echo "Connection failed: " . $e->getMessage();
+}
+
+//query for posts
+$stmt = $conn->query('SELECT .*, users.firstname, categories.name FROM posts JOIN categories ON posts.Categories_id = categories.id JOIN users ON posts.Users_id = users.id WHERE posts.id='. $_GET['id']);
+$stmt->execute();
+$post = $stmt->fetch(PDO::FETCH_ASSOC);
+?>
 <div class="container my-5">
   <table class="table table-bordered text-center">
     <thead>
@@ -37,21 +57,16 @@ include "../classes/tableClass.php";
     </thead>
     <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row"></th>
+      <td><?=$prospect['name']?></td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
     </tbody>
   </table>

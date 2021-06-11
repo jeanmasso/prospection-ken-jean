@@ -62,3 +62,11 @@
 
   <!-- PAGE CONTENT -->
   <div class="container">
+
+
+<!-- SELECT * FROM prospection.prospect
+JOIN mailing ON prospection.prospect.id_prospect = prospection.mailing.prospect_id WHERE result_mailing = 'NPAI'; -->
+
+
+<!-- SELECT * FROM prospection.prospect
+WHERE id_prospect NOT IN ( SELECT prospection.boost.prospect_id FROM prospection.boost); -->
