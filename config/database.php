@@ -28,7 +28,7 @@ class Database
     return $result = $stmt->fetchAll();
   }
 
-  /*public function errorProspect() // 1) Liste des entreprises aux coordonnées erronées > secrétaire
+  public function errorProspect() // 1) Liste des entreprises aux coordonnées erronées > secrétaire
   {
     $sql = 'SELECT * FROM prospect
             LEFT JOIN mailing ON mailing.prospect_id_prospect = prospect.id_prospect
@@ -38,7 +38,7 @@ class Database
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
     return $result = $stmt->fetchAll();
   }
-  public function relanceProspect() // 2) Liste des entreprises à relancer > assistance commerciale
+  /*public function relanceProspect() // 2) Liste des entreprises à relancer > assistance commerciale
   {
     $sql = 'SELECT * FROM prospect
             LEFT JOIN mailing ON mailing.prospect_id_prospect = prospect.id_prospect
