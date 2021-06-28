@@ -1,69 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+  include "config/database.php";
+  $prospects = new Database();
+  $prospects = $prospects->getAllProspect();
+?>
 
+<!DOCTYPE html>
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>POO</title>
-  <link rel="stylesheet" href="sass/style.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <title>Prospection</title>
+  <link rel="stylesheet" href="styles/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
-
 <body>
+  <div class="container my-5">
+    <table class="table table-bordered text-center">
+      <thead>
+      <tr>
+        <th colspan="2" scope="col">Informations Clients</th>
+        <th colspan="8" scope="col">Actions</th>
+      </tr>
+      <tr>
+        <th rowspan="2"><div class="mb-3">Id</div></th>
+        <th rowspan="2"><div class="mb-3">Clients</div></th>
+        <th colspan="2">Mailing</th>
+        <th colspan="2">Relance</th>
+        <th colspan="2">Visite</th>
+        <th colspan="2">Commande</th>
+      </tr>
+      <tr>
+        <th>Date</th>
+        <th>Résultat</th>
+        <th>Date</th>
+        <th>Résultat</th>
+        <th>Date</th>
+        <th>Résultat</th>
+        <th>Date</th>
+        <th>XPF</th>
+      </tr>
+      </thead>
+      <tbody>
+      <?php foreach ($prospects as $prospect) : ?>
+      <tr>
+        <td scope="row"><?php echo $prospect["id_prospect"]?></td>
+        <td scope="row"><?php echo $prospect["name_prospect"]?></td>
+        <!-- Mailing -->
+        <td><?php echo $prospect["date_mailing"]; ?></td>
+        <td>
+          <?php
+            if ($prospect["result_mailing"] === "RDV")
+              echo $prospect["result_mailing"] . " : " . $prospect["date_rdv_mailing"];
+            else
+              echo $prospect["result_mailing"];
+          ?>
+        </td>
+        <!-- Relance -->
+        <td><?php echo $prospect["date_relance"]; ?></td>
+        <td>
+          <?php
+            if ($prospect["result_relance"] === "RDV")
+              echo $prospect["result_relance"] . " : " . $prospect["date_rdv_relance"];
+            else
+              echo $prospect["result_relance"];
+          ?>
+        </td>
+        <!-- Visite -->
+        <td><?php echo $prospect["date_visite"]; ?></td>
+        <td><?php echo $prospect["result_visite"]; ?></td>
+        <!-- Commande -->
+        <td><?php echo $prospect["date_commande"]; ?></td>
+        <td><?php echo $prospect["price_commande"]; ?></td>
+      </tr>
+      <?php endforeach; ?>
+    </tbody>
+    </table>
+  </div>
 
-<header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="index.php">Prospection</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-              aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="views/post.php">Clients</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Factures</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-               data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-</header>
-
-<div>
-</div>
-
-<footer></footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
-
 </html>
